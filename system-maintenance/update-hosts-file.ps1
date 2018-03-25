@@ -1,16 +1,14 @@
 $HostsFilePath = "C:\Windows\System32\drivers\etc\hosts"
 $Uri = "http://someonewhocares.org/hosts/hosts"
 $ValidationToken = "### someonewhocares"
+$ValidationTokenEnd = "### someonewhocares-end"
 
 function Get-OldHostsContent() {
-    $lines = Get-Content -Path $HostsFilePath
-    for ($i = 0; $i -lt $lines.Count; $i++) {
-        $currentLine = $lines[$i].ToString()
-        $currentLine
-        if ($currentLine.StartsWith($ValidationToken)) {
-            return
-        }
-    }
+    [System.Collections.ArrayList]$lines = Get-Content -Path $HostsFilePath
+    $start = $lines.IndexOf($ValidationToken)
+    $end = $lines.IndexOf($ValidationTokenEnd)
+    $lines.RemoveRange($start, $end - $start + 1)
+    $lines
 }
 
 function Test-LineCorrect ($line) {
@@ -18,7 +16,7 @@ function Test-LineCorrect ($line) {
 }
 
 $newContent = Get-OldHostsContent
-if ($newContent[$newContent.Length-1] -ne $ValidationToken) {
+if ($newContent[$newContent.Length - 1] -ne $ValidationToken) {
     $newContent += $ValidationToken
 }
 
@@ -26,5 +24,9 @@ $hostsExtension = Invoke-WebRequest -Uri $Uri -UseBasicParsing
 $hostsExtension.Content -split "`n" | `
     ? { Test-LineCorrect $_ } | `
     % { $newContent += $_.ToString() }
+
+if ($newContent[$newContent.Length - 1] -ne $ValidationTokenEnd) {
+    $newContent += $ValidationTokenEnd
+}
 
 [System.IO.File]::WriteAllLines($HostsFilePath, $newContent)
