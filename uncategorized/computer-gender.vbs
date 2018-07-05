@@ -1,0 +1,1 @@
+CreateObject("SAPI.SpVoice").Speak"Guess what is my gender"
