@@ -7,14 +7,14 @@ function Clear-VisualStudioSolution {
 
     begin {
         Write-Verbose "Cmdlet Clear-VisualStudioSolution - Begin"
-        .\development\visual-studio\resolve-msbuild.ps1
+        . "$PSScriptRoot\Resolve-MsBuild.ps1"
         $MSBuildCall = Resolve-MsBuild
     }
 
     process {
         Write-Verbose "Cmdlet Clear-VisualStudioSolution - Process"
         Get-ChildItem -Path $StartPath -Recurse -ErrorAction SilentlyContinue | ? { $_.Extension -eq ".csproj" } | % {
-            & $MSBuildCall $_.FullName /t:clean
+            & $MSBuildCall $_.FullName /t:clean -verbosity:n
         }
     }
 

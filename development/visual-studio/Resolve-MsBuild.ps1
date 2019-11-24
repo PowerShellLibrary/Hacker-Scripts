@@ -1,8 +1,7 @@
 function Resolve-MsBuild {
     $msb2017 = Resolve-Path "${env:ProgramFiles(x86)}\Microsoft Visual Studio\*\*\MSBuild\*\bin\msbuild.exe" -ErrorAction SilentlyContinue
     if ($msb2017) {
-        Write-Host "Found MSBuild 2017 (or later)."
-        Write-Host $msb2017
+        Write-Host "Found MSBuild 2017 (or later)." -ForegroundColor Green
         return $msb2017 | Select-Object -First 1
     }
 
@@ -13,7 +12,5 @@ function Resolve-MsBuild {
     }
 
     Write-Host "Found MSBuild 2015."
-    Write-Host $msBuild2015
-
     return $msBuild2015
 }

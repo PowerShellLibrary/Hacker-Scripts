@@ -2,7 +2,7 @@ function Remove-Comments {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, Position = 0 )]
-        [System.IO.FileInfo]$file
+        [System.IO.FileInfo]$File
     )
 
     begin {
@@ -33,8 +33,4 @@ function Remove-Comments {
     end {
         Write-Verbose "Cmdlet Remove-Comments - End"
     }
-}
-
-Get-ChildItem -Path "C:\repo\Hacker-Scripts\scripts" | % {
-    Remove-Comments $_
 }
