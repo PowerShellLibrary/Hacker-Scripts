@@ -1,5 +1,5 @@
-<#
-
+function Remove-MergedBranches {
+    <#
 .SYNOPSIS
 Helper script for removing merged branches
 
@@ -16,17 +16,17 @@ Removes all merged branches except default branches: master, develop
 .EXAMPLE
 .\Remove-MergedBranches.ps1 -Branches naster,feature1
 Removes all merged branches except specified branches: master, feature1
-
 #>
 
-[CmdletBinding()]
-param(
-    [Parameter(Mandatory = $false)]
-    [string[]]$Branches = @("master", "develop")
-)
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $false)]
+        [string[]]$Branches = @("master", "develop")
+    )
 
-process {
-    . $PSScriptRoot\Get-MergedBranchces.ps1 $Branches | % {
-        git branch -d $_
+    process {
+        . $PSScriptRoot\Get-MergedBranchces.ps1 $Branches | % {
+            git branch -d $_
+        }
     }
 }

@@ -1,4 +1,5 @@
-<#
+function New-FolderJunction {
+    <#
 .SYNOPSIS
 Helper script for creating SymbolicLink aka folder junction
 
@@ -15,14 +16,15 @@ Creates a junction for "c:\repo\serialization" folder in "c:\sites\website1\Data
 Serialization data from the repository will be available in the website.
 #>
 
-[CmdletBinding()]
-param (
-    [parameter(Mandatory = $true, Position = 0)]
-    [string]$Source,
-    [parameter(Mandatory = $true, Position = 1)]
-    [string]$Destination
-)
+    [CmdletBinding()]
+    param (
+        [parameter(Mandatory = $true, Position = 0)]
+        [string]$Source,
+        [parameter(Mandatory = $true, Position = 1)]
+        [string]$Destination
+    )
 
-process {
-    New-Item -Path $Destination -ItemType SymbolicLink -Value $Source
+    process {
+        New-Item -Path $Destination -ItemType SymbolicLink -Value $Source
+    }
 }
