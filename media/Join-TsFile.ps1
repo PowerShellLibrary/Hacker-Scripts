@@ -20,8 +20,8 @@ Join-TsFile "c:\test\"
 Joins all *.ts files found in a "c:\test\" directory
 
 .EXAMPLE
-Join-TsFile -Items (gci "c:\test\2")
-Joins all files passed as with Items argument
+Join-TsFile -Files (gci "c:\test\2")
+Joins all files passed as with Files argument
 #>
     param (
         [Parameter(Mandatory = $false, Position = 0)]
