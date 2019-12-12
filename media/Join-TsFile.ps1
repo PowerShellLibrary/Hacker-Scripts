@@ -35,7 +35,7 @@ Joins all files passed as with Files argument
     $location = Get-Location
     try {
         if (![string]::IsNullOrWhiteSpace($FilesLocation)) {
-            $fileNames = Get-ChildItem -Path $FilesLocation -Filter "*.ts" | Sort-Object -Property Name | % { $_.Name }
+            $fileNames = Get-ChildItem -Path $FilesLocation -Filter "*.ts" | Sort-Object -Property CreationTime | % { $_.Name }
         }
         if ($Files) {
             $fileNames = $Files.Name
