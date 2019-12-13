@@ -10,12 +10,12 @@ Check predicate and returns either true or false depending on the result
 Predicate to be executed on an item
 
 .EXAMPLE
-1..4 | Test-Any { $_ -gt 5 }
-Displays False
+PS C:>1..4 | Test-Any { $_ -gt 5 }
+This command displays false because there no item greater than 5 in the collection
 
 .EXAMPLE
 1..4 | Test-Any { $_ -gt 2 }
-Displays True
+This command displays true because there is an item greater than 2 in the collection
 
 #>
     param( $FilterScript = $null )
