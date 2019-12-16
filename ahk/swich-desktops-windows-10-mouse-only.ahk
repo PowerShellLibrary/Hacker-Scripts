@@ -1,4 +1,7 @@
-﻿*WheelDown::
+﻿SetTitleMatchMode, RegEx
+#IfWinNotActive ^.*YouTube.*$
+
+*WheelDown::
 {
    if InsideLoop=1
     {
@@ -34,3 +37,5 @@ $RButton::
     if ActionInvoked = 0
         send, {blind}{RButton}
 }
+
+#IfWinNotActive
