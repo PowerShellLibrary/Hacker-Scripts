@@ -4,4 +4,5 @@
 !XButton2:: Send {Media_Next}
 !XButton1:: Send {Media_Prev}
 ScrollLock::Suspend
-Return
+!Numpad1::Run nircmdc setdefaultsounddevice "Speakers" ,,Hide
+!Numpad2::Run nircmdc setdefaultsounddevice "SPDIF Interface" ,,Hide
