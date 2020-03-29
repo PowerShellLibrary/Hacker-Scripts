@@ -1,6 +1,5 @@
 $Public = Get-ChildItem -Path $PSScriptRoot -Recurse -Filter "*.ps1" | ? { $_.Name[0].Equals($_.Name.ToUpper()[0]) }
 
-#Dot source the files
 Foreach ($import in $Public) {
     try {
         . $import.fullname
