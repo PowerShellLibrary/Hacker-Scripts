@@ -1,4 +1,4 @@
-$Public = Get-ChildItem -Path $PSScriptRoot -Recurse -Filter "*.ps1" | ? { $_.Name[0].Equals($_.Name.ToUpper()[0]) }
+$Public = Get-ChildItem -Path $PSScriptRoot -Recurse -Filter "*.ps1" -Exclude "Run-PSScriptAnalyzer.ps1" | ? { $_.Name[0].Equals($_.Name.ToUpper()[0]) }
 
 Foreach ($import in $Public) {
     try {

@@ -16,7 +16,7 @@ Creates a junction for "c:\repo\serialization" folder in "c:\sites\website1\Data
 Serialization data from the repository will be available in the website.
 #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param (
         [parameter(Mandatory = $true, Position = 0)]
         [string]$Source,
@@ -25,6 +25,8 @@ Serialization data from the repository will be available in the website.
     )
 
     process {
-        New-Item -Path $Destination -ItemType SymbolicLink -Value $Source
+        if ($PSCmdlet.ShouldProcess("$Source")) {
+            New-Item -Path $Destination -ItemType SymbolicLink -Value $Source
+        }
     }
 }

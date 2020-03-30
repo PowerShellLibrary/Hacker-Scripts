@@ -65,7 +65,6 @@ Iterates through folders from a 'c:\repo' directory and displays git status of e
                 }
             }
         }
-        catch { }
         finally {
             Set-Location $revertPath
         }

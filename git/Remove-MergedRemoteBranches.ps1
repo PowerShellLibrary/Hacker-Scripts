@@ -18,7 +18,7 @@ Removes all merged remote branches except default branches: master, develop, HEA
 Removes all merged remote branches except specified branches: master, feature1
 #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $false)]
         [string[]]$Branches = @("master", "develop", "HEAD")
@@ -30,7 +30,9 @@ Removes all merged remote branches except specified branches: master, feature1
             $origin = $_.Substring(0, $i)
             $branch = $_.Substring($i + 1)
             Write-Host "$origin  ->  $branch"
-            git push $origin --delete $branch
+            if ($PSCmdlet.ShouldProcess($branch)) {
+                git push $origin --delete $branch
+            }
         }
     }
 }

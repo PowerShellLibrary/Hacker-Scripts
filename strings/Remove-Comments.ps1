@@ -1,5 +1,5 @@
 function Remove-Comments {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $true, Position = 0 )]
         [System.IO.FileInfo]$File
@@ -27,7 +27,9 @@ function Remove-Comments {
                 $stop = $false
             }
         }
-        Set-Content -Value $contentWithoutComments -Path $file.FullName
+        if ($PSCmdlet.ShouldProcess("$($file.FullName)")) {
+            Set-Content -Value $contentWithoutComments -Path $file.FullName
+        }
     }
 
     end {

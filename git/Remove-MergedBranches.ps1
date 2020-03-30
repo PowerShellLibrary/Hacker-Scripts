@@ -18,7 +18,7 @@ Removes all merged branches except default branches: master, develop
 Removes all merged branches except specified branches: master, feature1
 #>
 
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'Medium')]
     param(
         [Parameter(Mandatory = $false)]
         [string[]]$Branches = @("master", "develop")
@@ -26,7 +26,10 @@ Removes all merged branches except specified branches: master, feature1
 
     process {
         . $PSScriptRoot\Get-MergedBranchces.ps1 $Branches | % {
-            git branch -d $_
+            $branch = $_
+            if ($PSCmdlet.ShouldProcess($branch)) {
+                git branch -d $branch
+            }
         }
     }
 }
