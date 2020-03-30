@@ -10,7 +10,7 @@ Folder path that will be exposed via SymbolicLink
 Location of the SymbolicLink (endpoint)
 
 .EXAMPLE
-.\New-FolderJunction.ps1 "c:\repo\serialization" "c:\sites\website1\Data\serialization"
+New-FolderJunction "c:\repo\serialization" "c:\sites\website1\Data\serialization"
 
 Creates a junction for "c:\repo\serialization" folder in "c:\sites\website1\Data\serialization".
 Serialization data from the repository will be available in the website.

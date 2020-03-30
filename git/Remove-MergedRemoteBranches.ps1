@@ -10,11 +10,11 @@ This script will remove all remote branches which were already merged to the cur
 Collection of excluded from removing branches
 
 .EXAMPLE
-.\Remove-MergedRemoteBranches.ps1
+Remove-MergedRemoteBranches
 Removes all merged remote branches except default branches: master, develop, HEAD
 
 .EXAMPLE
-.\Remove-MergedRemoteBranches.ps1 -Branches naster,feature1
+Remove-MergedRemoteBranches -Branches naster,feature1
 Removes all merged remote branches except specified branches: master, feature1
 #>
 

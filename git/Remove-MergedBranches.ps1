@@ -10,11 +10,11 @@ This script will remove all branches which were already merged to the current br
 Collection of excluded from removing branches
 
 .EXAMPLE
-.\Remove-MergedBranches.ps1
+Remove-MergedBranches
 Removes all merged branches except default branches: master, develop
 
 .EXAMPLE
-.\Remove-MergedBranches.ps1 -Branches naster,feature1
+Remove-MergedBranches -Branches naster,feature1
 Removes all merged branches except specified branches: master, feature1
 #>
 

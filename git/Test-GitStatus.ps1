@@ -15,11 +15,11 @@ It provides following information:
 Root dir containing other git repo folders
 
 .EXAMPLE
-.\Test-GitStatus
+Test-GitStatus
 Iterates through folders in a current directory and displays git status of each repo
 
 .EXAMPLE
-.\Test-GitStatus c:\repo
+Test-GitStatus c:\repo
 Iterates through folders from a 'c:\repo' directory and displays git status of each repo
 #>
 

@@ -10,7 +10,7 @@ This script will return all branches names that were already merged to the curre
 Collection of excluded branches
 
 .EXAMPLE
-.\Test-GitRepo.ps1
+Test-GitRepo
 Gets all merged branches except default branches: master, develop
 #>
 

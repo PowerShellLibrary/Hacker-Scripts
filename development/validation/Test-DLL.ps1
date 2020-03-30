@@ -13,11 +13,11 @@ This script does three things:
 Location of the folder where your DLLs live.
 
 .EXAMPLE
-.\Test-DLL.ps1 "C:\dll" -CleanHost
+Test-DLL "C:\dll" -CleanHost
 Clears console and then displays information about all DLLs located in "C:\\dll"
 
 .EXAMPLE
-.\Test-DLL.ps1 "C:\dll"
+Test-DLL "C:\dll"
 Displays information about all DLLs located in "C:\\dll"
 #>
 

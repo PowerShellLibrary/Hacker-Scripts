@@ -10,11 +10,11 @@ This script will return all branches names that were already merged to the curre
 Collection of excluded branches
 
 .EXAMPLE
-.\Get-MergedBranchces.ps1
+Get-MergedBranchces
 Gets all merged branches except default branches: master, develop
 
 .EXAMPLE
-.\Get-MergedBranchces.ps1 -Branches naster,feature1
+Get-MergedBranchces -Branches naster,feature1
 Gets all merged branches except specified branches: master, feature1
 #>
 
