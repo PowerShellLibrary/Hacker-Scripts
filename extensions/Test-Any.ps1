@@ -10,7 +10,7 @@ Check predicate and returns either true or false depending on the result
 Predicate to be executed on an item
 
 .EXAMPLE
-PS C:>1..4 | Test-Any { $_ -gt 5 }
+1..4 | Test-Any { $_ -gt 5 }
 This command displays false because there no item greater than 5 in the collection
 
 .EXAMPLE
@@ -19,13 +19,19 @@ This command displays true because there is an item greater than 2 in the collec
 
 #>
     param( $FilterScript = $null )
+    begin {
+        $flag = $false
+    }
+
     process {
-        if ($FilterScript | Invoke-Expression) {
-            $true;
-            break
+        if (!$flag) {
+            if ($FilterScript | Invoke-Expression) {
+                $flag = $true;
+                return
+            }
         }
     }
     end {
-        $false
+        $flag
     }
 }
