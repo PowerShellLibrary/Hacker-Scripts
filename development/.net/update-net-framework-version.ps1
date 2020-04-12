@@ -1,6 +1,6 @@
 # configuration
 $targetFramework = "net48"
-$startPath = "C:\repo\Sitecore\ContentTagging\code"
+$startPath = "C:\repo\src"
 # configuration - END
 
 Clear-Host
