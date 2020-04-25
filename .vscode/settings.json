@@ -5,4 +5,5 @@
         "editor.selectionBackground": "#99C9EF",
         "editor.selectionHighlightBackground": "#99C9EF"
     },
+    "files.defaultLanguage": "powershell"
 }
