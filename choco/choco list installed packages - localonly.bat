@@ -1,0 +1,2 @@
+clist -lo
+pause
