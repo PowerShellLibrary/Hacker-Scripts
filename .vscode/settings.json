@@ -1,4 +1,8 @@
 {
-    "editor.fontSize": 16,
-    "powershell.scriptAnalysis.settingsPath": "PSScriptAnalyzerSettings.psd1"
+    "editor.fontSize": 18,
+    "workbench.colorTheme": "PowerShell ISE",
+    "workbench.colorCustomizations": {
+        "editor.selectionBackground": "#99C9EF",
+        "editor.selectionHighlightBackground": "#99C9EF"
+    },
 }
