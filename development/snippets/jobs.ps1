@@ -16,3 +16,4 @@ While ($(Get-Job -State Running).count -gt 0) {
         Receive-Job -Job $_
     }
 }
+Get-Job | Remove-Job
