@@ -21,4 +21,9 @@ Write-Host "[System.DateTime] | Get-Member -MemberType Method Get*" -ForegroundC
 Write-Host Get-ItemProperty -ForegroundColor Green
 Get-Item "C:\Windows\System32\drivers\etc\hosts" | Get-ItemProperty | Format-List -Property *
 
+Write-Host "Get-Module -ListAvailable" -ForegroundColor Green
 Get-Module -ListAvailable
+
+Write-Host Get-WindowsOptionalFeature -ForegroundColor Green
+Get-WindowsOptionalFeature -Online -FeatureName *iis*
+#Enable-WindowsOptionalFeature
