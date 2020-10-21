@@ -1,0 +1,1 @@
+Get-Service | Out-GridView -PassThru -Title "Select services for removal" | % { sc.exe delete $_.Name }
