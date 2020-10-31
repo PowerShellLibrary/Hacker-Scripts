@@ -15,6 +15,8 @@ Get-Command | Group-Object Verb | Sort-Object Count -Descending
 Write-Host "Get-Command | Group-Object Noun | Sort-Object Name" -ForegroundColor Green
 Get-Command | Group-Object Noun | Sort-Object Name | Sort-Object Count -Descending | Select-Object -First 10
 
+Get-Service  | Sort-Object -Property @{expression = 'Status'; descending = $true }, @{expression = 'DisplayName'; descending = $false }
+
 Write-Host "[System.DateTime] | Get-Member -MemberType Method Get*" -ForegroundColor Green
 [System.DateTime] | Get-Member -MemberType Method Get*
 
