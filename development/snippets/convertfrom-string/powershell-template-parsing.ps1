@@ -10,6 +10,4 @@ $testText = @'
     Wild Shrimp, (111)  222-3333, 1
 '@
 
-$testText | ConvertFrom-String -TemplateContent $template -OutVariable PersonalData | Out-Null
-Write-output ("Pet items found: " + ($PersonalData.Count))
-$PersonalData
+$testText | ConvertFrom-String -TemplateContent $template
