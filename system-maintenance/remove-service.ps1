@@ -1,0 +1,1 @@
+Get-Service | ? { $_.Name.Contains("xconnect") } | % { sc.exe delete $_.Name }
