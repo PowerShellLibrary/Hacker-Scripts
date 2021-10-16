@@ -3,30 +3,39 @@ $Uri = "http://someonewhocares.org/hosts/hosts"
 $ValidationToken = "### someonewhocares"
 $ValidationTokenEnd = "### someonewhocares-end"
 
-function Get-OldHostsContent() {
-    [System.Collections.ArrayList]$lines = Get-Content -Path $HostsFilePath
-    $start = $lines.IndexOf($ValidationToken)
-    $end = $lines.IndexOf($ValidationTokenEnd)
-    $lines.RemoveRange($start, $end - $start + 1)
-    $lines
+function Get-NewHostsContent() {
+    $hostsExtension = Invoke-WebRequest -Uri $Uri -UseBasicParsing
+    $hostsExtension.Content -split "`n" | ? { Test-LineCorrect $_ }
 }
 
 function Test-LineCorrect ($line) {
-    $_.StartsWith("127.0.0.1") -eq $true
+    $_.StartsWith("127.0.0.1") -eq $true -or $_.StartsWith("#<") -or $_.StartsWith("#</")
 }
 
-$newContent = Get-OldHostsContent
-if ($newContent[$newContent.Length - 1] -ne $ValidationToken) {
-    $newContent += $ValidationToken
+[System.Collections.ArrayList]$lines = Get-Content -Path $HostsFilePath
+$start = $lines.IndexOf($ValidationToken)
+$end = $lines.IndexOf($ValidationTokenEnd)
+
+if ($start -eq -1 -and $end -ne -1) {
+    Write-Error "Incorrect hosts file structure. Missing $ValidationToken"
+    exit
 }
 
-$hostsExtension = Invoke-WebRequest -Uri $Uri -UseBasicParsing
-$hostsExtension.Content -split "`n" | `
-    ? { Test-LineCorrect $_ } | `
-    % { $newContent += $_.ToString() }
-
-if ($newContent[$newContent.Length - 1] -ne $ValidationTokenEnd) {
-    $newContent += $ValidationTokenEnd
+if ($start -ne -1 -and $end -eq -1) {
+    Write-Error "Incorrect hosts file structure. Missing $ValidationTokenEnd"
+    exit
 }
 
-[System.IO.File]::WriteAllLines($HostsFilePath, $newContent)
+if ($start -eq -1 -and $end -eq -1) {
+    Write-Host "Initializing hosts - missing extension"
+    $lines += $ValidationToken
+    Get-NewHostsContent | % { $lines += $_ }
+    $lines += $ValidationTokenEnd
+}
+else {
+    Write-Host "Updating hosts"
+    $lines.RemoveRange($start + 1, $end - $start - 1)
+    $approvedLines = Get-NewHostsContent
+    $lines.InsertRange($start + 1, $approvedLines)
+}
+[System.IO.File]::WriteAllLines($HostsFilePath, $lines)
