@@ -1,0 +1,27 @@
+<Configuration>
+    <vGPU>Enable</vGPU>
+    <Networking>Enable</Networking>
+    <AudioInput>Disable</AudioInput>
+    <VideoInput>Disable</VideoInput>
+    <ProtectedClient>Enable</ProtectedClient>
+    <PrinterRedirection>Disable</PrinterRedirection>
+    <ClipboardRedirection>Disable</ClipboardRedirection>
+    <MappedFolders>
+        <MappedFolder>
+            <HostFolder>C:\sandbox\readonly</HostFolder>
+            <ReadOnly>true</ReadOnly>
+        </MappedFolder>
+        <MappedFolder>
+            <HostFolder>C:\sandbox\shared</HostFolder>
+            <ReadOnly>false</ReadOnly>
+        </MappedFolder>
+    </MappedFolders>
+    <LogonCommand>
+        <!-- opens explorer inside sandbox -->
+        <Command>explorer.exe C:\users\WDAGUtilityAccount\Downloads</Command>
+        <!-- runs PowerShell in the background -->
+        <Command>powershell.exe -executionpolicy unrestricted "C:\Users\WDAGUtilityAccount\Desktop\readonly\run.ps1"</Command>
+        <!-- runs PowerShell in the foreground - windows opened -->
+        <Command>powershell -executionpolicy unrestricted -command "start powershell {-noexit -file C:\Users\WDAGUtilityAccount\Desktop\readonly\run.ps1}"</Command>
+    </LogonCommand>
+</Configuration>
