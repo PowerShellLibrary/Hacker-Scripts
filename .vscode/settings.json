@@ -6,5 +6,8 @@
         "editor.selectionHighlightBackground": "#99C9EF",
         "editor.lineHighlightBackground": "#ffffff"
     },
-    "files.defaultLanguage": "powershell"
+    "files.defaultLanguage": "powershell",
+    "files.associations": {
+        "*.wsb": "xml"
+    }
 }
