@@ -1,13 +1,14 @@
 {
-    "editor.fontSize": 18,
-    "workbench.colorTheme": "PowerShell ISE",
-    "workbench.colorCustomizations": {
-        "editor.selectionBackground": "#99c8ef96",
-        "editor.selectionHighlightBackground": "#99C9EF",
-        "editor.lineHighlightBackground": "#ffffff"
-    },
-    "files.defaultLanguage": "powershell",
-    "files.associations": {
-        "*.wsb": "xml"
-    }
+  "editor.fontSize": 18,
+  "workbench.colorTheme": "Monokai Charcoal Full Dark",
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#202020",
+    "editor.selectionHighlightBackground": "#141414",
+    "editor.selectionHighlightBorder": "#b3ff00",
+    "editor.background": "#0A0A0A"
+  },
+  "files.defaultLanguage": "powershell",
+  "files.associations": {
+    "*.wsb": "xml"
+  }
 }
