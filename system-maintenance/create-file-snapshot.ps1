@@ -20,6 +20,9 @@ try {
         git commit -m "$date"
     }
 }
+catch{
+    Write-Error $_.Exception
+}
 finally {
     Set-Location $current
 }

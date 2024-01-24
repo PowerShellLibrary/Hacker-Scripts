@@ -1,6 +1,6 @@
 {
   "editor.fontSize": 18,
-  "workbench.colorTheme": "Monokai Charcoal Full Dark",
+  "workbench.colorTheme": "Default Dark Modern",
   "workbench.colorCustomizations": {
     "editor.lineHighlightBackground": "#202020",
     "editor.selectionHighlightBackground": "#141414",

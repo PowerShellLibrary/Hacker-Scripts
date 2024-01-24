@@ -50,6 +50,6 @@ $wsEmpty.Activate()
 1..2 | % { $wsEmpty.Rows(1).Delete() | Out-Null }
 
 # save file as csv
-$wsEmpty.SaveAs("$scriptPath\..\.test\excel.csv", 6)
+$wsEmpty.SaveAs("$scriptPath\..\.test\dist\excel.csv", 6)
 # close excel application
 $Excel.Quit()
