@@ -1,4 +1,5 @@
 {
+  // "editor.fontFamily": "Cascadia Code, jetbrains mono, 'Courier New', monospace", // fallback fonts
   "editor.fontSize": 18,
   "workbench.colorTheme": "Default Dark Modern",
   "workbench.colorCustomizations": {
