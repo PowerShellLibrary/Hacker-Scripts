@@ -1,4 +1,5 @@
 # https://ffmpeg.org/ffmpeg.html
+
 # Takes two files (audio, video) and combine them together into mp4 file.
 # As audio is shorter add offset to the video so it can sync with audio
 #
@@ -20,3 +21,15 @@ ffmpeg -y -itsoffset 0.2 -i v.webm -i a.mp4 -map 0:0 -map 1:0 -c copy oFilename.
 # -ac channels        set number of audio channels
 # -ab bitrate         audio bitrate (please use -b:a)
 ffmpeg -i "$($_.FullName)" -vn -ar 44100 -ac 2 -b:a 192k "$($_.FullName.Replace('.wav','.mp3'))"
+
+
+# Takes two files (audio, image) and combine them together into mp4 file.
+# -loop 1           - loop the input image infinitely (1 - loop, 0 - no loop)
+# -i img.jpg        - specifies an input file (image)
+# -i audio.mp3      - second input file (MP3 audio)
+# -c:v libx264      - specifies the video codec
+# -c:a aac          - specifies the audio codec. aac is a standard codec for MP4 files, offering good quality at lower bitrates.
+# -b:a 320k         - sets the audio bitrate
+# -shortest         - this option ensures that the output video will be as long as the shortest input.
+#  output.mp4       - name of the output video file
+ffmpeg -loop 1 -i img.jpg -i audio.mp3 -c:v libx264 -c:a aac -b:a 320k -shortest output.mp4
