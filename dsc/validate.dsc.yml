@@ -1,0 +1,8 @@
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2023/08/config/document.json
+
+resources:
+  - name: Validate the OS is Windows
+    type: Microsoft/OSInfo
+    properties:
+      family: Windows
+

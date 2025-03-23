@@ -1,0 +1,9 @@
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2023/08/config/document.json
+resources:
+  - name: Manifest V2 Availability
+    type: Microsoft.Windows/Registry
+    properties:
+      keyPath:   HKLM\SOFTWARE\Policies\Google\Chrome\
+      valueName: ExtensionManifestV2Availability
+      valueData:
+        DWord: 2
