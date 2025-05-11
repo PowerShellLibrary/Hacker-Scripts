@@ -33,3 +33,15 @@ ffmpeg -i "$($_.FullName)" -vn -ar 44100 -ac 2 -b:a 192k "$($_.FullName.Replace(
 # -shortest         - this option ensures that the output video will be as long as the shortest input.
 #  output.mp4       - name of the output video file
 ffmpeg -loop 1 -i img.jpg -i audio.mp3 -c:v libx264 -c:a aac -b:a 320k -shortest output.mp4
+
+# Crop video from the top
+# This command crops the video by removing 440 pixels from the top, effectively shifting the video down by that amount.
+# -i input.mp4                  - specifies the input video file
+# -vf "crop=iw:ih-440:0:440"    - applies a video filter (vf) to crop the video.
+#   - iw        Input width (keeps the full width of the video).
+#   - ih-440    Input height minus 440 pixels
+#   - 0         X offset (starts cropping from the left edge).
+#   - 440       Y offset (starts cropping from 440 pixels down from the top).
+# -c:a copy                     - copies the audio stream without re-encoding it
+# output.mp4                    - name of the output video file
+ffmpeg -i .\input.mp4 -vf "crop=iw:ih-440:0:440" -c:a copy output.mp4
