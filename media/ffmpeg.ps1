@@ -34,6 +34,7 @@ ffmpeg -i "$($_.FullName)" -vn -ar 44100 -ac 2 -b:a 192k "$($_.FullName.Replace(
 #  output.mp4       - name of the output video file
 ffmpeg -loop 1 -i img.jpg -i audio.mp3 -c:v libx264 -c:a aac -b:a 320k -shortest output.mp4
 
+
 # Crop video from the top
 # This command crops the video by removing 440 pixels from the top, effectively shifting the video down by that amount.
 # -i input.mp4                  - specifies the input video file
@@ -45,3 +46,20 @@ ffmpeg -loop 1 -i img.jpg -i audio.mp3 -c:v libx264 -c:a aac -b:a 320k -shortest
 # -c:a copy                     - copies the audio stream without re-encoding it
 # output.mp4                    - name of the output video file
 ffmpeg -i .\input.mp4 -vf "crop=iw:ih-440:0:440" -c:a copy output.mp4
+
+
+# Inspect media file streams
+# ffprobe prints detailed information about the input file, including
+# codec, format, bitrate, duration, and stream indexes (video, audio,
+# subtitles, etc.).
+ffprobe .\input.mp4
+
+
+# Extract a specific audio stream from a video file to MP3
+# -i input.mp4            - input file containing video and audio streams
+# -map 0:2                - select stream index 2 from input 0
+# -c:a libmp3lame         - use the LAME MP3 encoder for the audio stream
+# -q:a 2                  - set variable bitrate (VBR) audio quality level 2
+#                            (lower is better quality, typical range 0–9)
+# out0.mp3                - output MP3 file containing the selected audio stream
+ffmpeg -i .\input.mp4 -map 0:2 -c:a libmp3lame -q:a 2 out0.mp3
