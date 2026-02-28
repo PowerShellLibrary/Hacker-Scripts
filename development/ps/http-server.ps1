@@ -24,9 +24,9 @@ try {
 
             [string]$html = "<h1>A Powershell Webserver</h1><p>home page</p>"
 
-            $buffer = [System.Text.Encoding]::UTF8.GetBytes($html) # convert htmtl to bytes
+            $buffer = [System.Text.Encoding]::UTF8.GetBytes($html) # convert HTML to bytes
             $context.Response.ContentLength64 = $buffer.Length
-            $context.Response.OutputStream.Write($buffer, 0, $buffer.Length) #stream to broswer
+            $context.Response.OutputStream.Write($buffer, 0, $buffer.Length) # stream to browser
             $context.Response.OutputStream.Close() # close the response
         }
 

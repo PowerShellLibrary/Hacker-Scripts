@@ -16,5 +16,5 @@ if ($interface) {
     Set-DnsClientServerAddress -InterfaceIndex $ifIndex -ServerAddresses $DNS
 }
 else {
-    Write-Error "Could not find network inteface with a given index"
+    Write-Error "Could not find network interface with a given index"
 }

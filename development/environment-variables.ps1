@@ -16,7 +16,7 @@ Set-Item "env:$key" "value2"
 [System.Environment]::SetEnvironmentVariable("MY_VAR", "value1", "User")
 Write-Host $env:MY_VAR
 
-# 4. Environment Variables in GitHubs Actions
+# 4. Environment Variables in GitHub Actions
 # Environment variables set during one step are not automatically available in subsequent steps in GitHub Actions.
 # To persist environment variables between steps, you need to explicitly use the GITHUB_ENV file.
 $value = "value1"

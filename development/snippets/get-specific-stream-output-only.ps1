@@ -28,7 +28,7 @@ Write-Messages -Verbose -Debug  6>&1 | Out-File -FilePath .\OutputFile.txt
 # writes Verbose and Debug
 Write-Messages -Verbose -Debug  5>&1 4>&1 | Out-File -FilePath .\OutputFile.txt
 
-# writes Verbose and Error from objec to a file
+# writes Verbose and Error from object to a file
 $outStream = $( . {
                 Write-Messages -Verbose
                 Write-Messages -Verbose

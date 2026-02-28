@@ -1,4 +1,4 @@
-# Block a ABCD.exe from accessing the Internet using Windows Defender Firewall
+# Block ABCD.exe from accessing the Internet using Windows Defender Firewall
 $exePath = "C:\Users\Alan\AppData\Local\Programs\ABCD\ABCD.exe"
 
 # Add outbound rule to block ABCD.exe

@@ -9,7 +9,7 @@ Get-ChildItem -Path $startPath -Recurse -ErrorAction SilentlyContinue | ? { $_.E
     [xml]$xmlDoc = Get-Content $_.FullName
     [System.Xml.XmlNode]$node = $xmlDoc.Project.PropertyGroup.ChildNodes | ? { $_.Name -eq "TargetFramework" }
     if ($node.InnerText -ne $targetFramework) {
-        Write-Host "`tChanking value from '$($node.InnerText)' to '$targetFramework'" -ForegroundColor DarkCyan
+        Write-Host "`tChanging value from '$($node.InnerText)' to '$targetFramework'" -ForegroundColor DarkCyan
         $node.InnerText = $targetFramework
         $xmlDoc.Save($_.FullName)
     }

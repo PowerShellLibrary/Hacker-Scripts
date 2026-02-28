@@ -25,9 +25,9 @@ $ns.Name = "test"
 # select newly created empty sheet by index
 $wsEmpty = $wb.Worksheets.Item(1)
 $wsEmpty.Activate()
-# select cells (desitnation for copy action) - specify region
+# select cells (destination for copy action) - specify region
 $dst = $wsEmpty.Range("A1:B2")
-# select cells (desitnation for copy action) - invoke selection
+# select cells (destination for copy action) - invoke selection
 $dst.select() | Out-Null
 
 # switch to data sheet
