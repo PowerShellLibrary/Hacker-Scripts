@@ -9,7 +9,7 @@ function Get-NewHostsContent() {
 }
 
 function Test-LineCorrect ($line) {
-    $_.StartsWith("127.0.0.1") -eq $true -or $_.StartsWith("#<") -or $_.StartsWith("#</")
+    $line.StartsWith("127.0.0.1") -eq $true -or $line.StartsWith("#<") -or $line.StartsWith("#</")
 }
 
 [System.Collections.ArrayList]$lines = Get-Content -Path $HostsFilePath
