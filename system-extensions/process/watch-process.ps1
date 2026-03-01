@@ -8,4 +8,5 @@ while (1 -eq 1) {
             Start-Sleep -Seconds 1
         }
     }
+    Start-Sleep -Seconds 1
 }
