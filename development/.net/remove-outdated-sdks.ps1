@@ -33,7 +33,7 @@ $toRemove | ForEach-Object {
 Write-Host "WARNING: If you type 'Y', all folders listed above will be removed." -ForegroundColor Red
 $confirmation = Read-Host "Are you Sure You Want To Proceed"
 if ($confirmation -eq 'y') {
-    $foldersToRemove | % { $_.Delete($true) }
+    $toRemove | % { $_.Delete($true) }
 }else{
     Write-Host "Operation cancelled" -ForegroundColor Red
 }
