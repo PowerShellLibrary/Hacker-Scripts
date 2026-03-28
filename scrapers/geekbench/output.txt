@@ -1,0 +1,38 @@
+.\Get-GeekbenchResults.ps1 -Query "Dell OptiPlex 3000" -MaxPages 1 -DelaySeconds 2 -OutputFile result.csv
+
+Geekbench Scraper
+  Query      : Dell OptiPlex 3000
+  Output     : result.csv
+  Max pages  : 1
+  Delay      : 2s
+
+  Reached MaxPages limit (1).
+
+Done!  25 results  ->  result.csv
+
+--- Score summary: Dell OptiPlex 3000 ---
+Dell Inc. OptiPlex 3000                                 SC= 2287  MC=  7855  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2639  MC= 11543  [Linux]
+Dell Inc. OptiPlex 3000                                 SC= 2376  MC=  7527  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2689  MC= 11324  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2286  MC=  8059  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2499  MC=  7961  [Linux]
+Dell Inc. OptiPlex 3000                                 SC= 2041  MC=  6027  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2230  MC=  6305  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2219  MC=  7103  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2070  MC=  6767  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2022  MC=  6353  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2358  MC=  8985  [Linux]
+Dell Inc. OptiPlex 3000                                 SC= 2258  MC=  7002  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2146  MC=  5308  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2449  MC=  8492  [Linux]
+Dell OptiPlex 3000 (12500T w/ 20W TDP)                  SC= 1953  MC=  5170  [Linux]
+Dell Inc. OptiPlex 3000                                 SC= 2306  MC=  8855  [Linux]
+Dell Inc. OptiPlex 3000                                 SC= 2052  MC=  7995  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2405  MC= 10107  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2307  MC=  6677  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2110  MC=  8009  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2209  MC=  8197  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2182  MC=  6726  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2270  MC=  6078  [Windows]
+Dell Inc. OptiPlex 3000                                 SC= 2292  MC=  7505  [Linux]
