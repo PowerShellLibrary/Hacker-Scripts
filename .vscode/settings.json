@@ -1,7 +1,7 @@
 {
   // "editor.fontFamily": "Cascadia Code, jetbrains mono, 'Courier New', monospace", // fallback fonts
   "editor.fontSize": 18,
-  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.colorTheme": "Dark Modern",
   "workbench.colorCustomizations": {
     "editor.lineHighlightBackground": "#202020",
     "editor.selectionHighlightBackground": "#141414",
