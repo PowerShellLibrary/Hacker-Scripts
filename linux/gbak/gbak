@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+
+usage() {
+  echo 'Usage: gbak [-y] ["backup comment" [absolute-repository-path]]'
+  echo 'Missing comment is prompted; repository path defaults to the current directory.'
+  echo '-y skips RESET confirmation. Use -- before arguments beginning with a dash.'
+  echo 'Documentation: see linux/gbak/README.md.'
+}
+
+fail() {
+  echo "Error: $1" >&2
+  exit "${2:-1}"
+}
+
+autoapprove=false
+arguments=()
+while (( $# )); do
+  case "$1" in
+    -y) autoapprove=true ;;
+    -h|--help) usage; exit 0 ;;
+    --) shift; arguments+=("$@"); break ;;
+    -*) fail "unknown option: $1" 2 ;;
+    *) arguments+=("$1") ;;
+  esac
+  shift
+done
+if (( ${#arguments[@]} > 2 )); then
+  usage >&2
+  exit 2
+fi
+
+comment=${arguments[0]:-}
+repo=${arguments[1]:-$PWD}
+if [[ -z "$comment" ]]; then
+  read -r -p 'Backup comment: ' comment
+fi
+
+if [[ -z "${comment//[[:space:]]/}" || "$repo" != /* || ! -d "$repo" ]]; then
+  fail 'nonempty comment and existing absolute repository path required.' 2
+fi
+
+slug=$(printf '%s' "$comment" | LC_ALL=C tr '[:upper:]' '[:lower:]' | LC_ALL=C sed -E 's/[^a-z0-9]+/-/g; s/^-+//; s/-+$//' | cut -c 1-48)
+if [[ -z "$slug" ]]; then
+  fail 'comment needs ASCII letters or digits.' 2
+fi
+
+cd "$repo"
+if [[ "$(git rev-parse --show-toplevel 2>/dev/null)" != "$PWD" ]]; then
+  fail 'path must be Git repository root.'
+fi
+if ! branch=$(git symbolic-ref --quiet --short HEAD); then
+  fail 'detached HEAD.'
+fi
+if ! upstream=$(git rev-parse --abbrev-ref --symbolic-full-name '@{upstream}'); then
+  fail 'no configured upstream.'
+fi
+if [[ "$upstream" != origin/* ]]; then
+  fail 'upstream must be origin/*.'
+fi
+if [[ -n "$(git ls-files -u)" ]]; then
+  fail 'unresolved merge conflicts.'
+fi
+
+rebase_merge=$(git rev-parse --git-path rebase-merge)
+rebase_apply=$(git rev-parse --git-path rebase-apply)
+merge_head=$(git rev-parse --git-path MERGE_HEAD)
+if [[ -d "$rebase_merge" || -d "$rebase_apply" || -f "$merge_head" ]]; then
+  fail 'merge/rebase in progress.'
+fi
+
+echo "Repository: $PWD"
+echo "Branch: $branch -> $upstream"
+echo 'Fetching origin (GitHub may request your key passphrase)...'
+git fetch origin
+base=$(git rev-parse HEAD)
+target=$(git rev-parse "$upstream")
+if ! git merge-base --is-ancestor "$base" "$target"; then
+  fail 'HEAD diverged from upstream.'
+fi
+backup="work/$(date +%Y-%m-%d-%H%M%S)-${slug}"
+if git show-ref --verify --quiet "refs/heads/$backup" || git ls-remote --exit-code --heads origin "$backup" >/dev/null 2>&1; then
+  fail "backup branch already exists: $backup"
+fi
+# Save index before staging everything, so a failed backup can be recovered.
+index_backup=$(mktemp "${TMPDIR:-/tmp}/gbak-index.XXXXXXXX")
+cp "$(git rev-parse --git-path index)" "$index_backup"
+echo "Index recovery copy: $index_backup"
+git add -A
+if git diff --cached --quiet; then
+  echo 'No non-ignored changes to back up. Refusing reset.' >&2
+  exit 1
+fi
+tree=$(git write-tree)
+commit=$(printf 'chore(backup): %s\n' "$comment" | git commit-tree "$tree" -p HEAD)
+git update-ref "refs/heads/$backup" "$commit"
+git push origin "refs/heads/$backup:refs/heads/$backup"
+if [[ "$(git write-tree)" != "$tree" ]] || ! git diff --quiet || [[ -n "$(git ls-files --others --exclude-standard)" ]]; then
+  fail 'working tree changed during backup; reset cancelled.'
+fi
+echo "Backup pushed: $backup ($commit)"
+printf '\nWARNING: git reset --hard will discard tracked changes and may overwrite conflicting untracked files.\n'
+printf 'Branch: %s\nReset target: %s\n' "$branch" "$target"
+if [[ "$autoapprove" != true ]]; then
+  read -r -p 'Type RESET to proceed (anything else cancels): ' answer
+  if [[ "$answer" != RESET ]]; then
+    echo 'Reset cancelled. Backup remains pushed.'
+    exit 0
+  fi
+fi
+
+if [[ "$(git symbolic-ref --quiet --short HEAD)" != "$branch" ||
+      "$(git rev-parse HEAD)" != "$base" ||
+      "$(git rev-parse "$upstream")" != "$target" ||
+      "$(git write-tree)" != "$tree" ]] ||
+   ! git diff --quiet ||
+   [[ -n "$(git ls-files --others --exclude-standard)" ]]; then
+  fail 'repository changed since backup; refusing reset.'
+fi
+
+git reset --hard "$target"
+echo "Done. $branch reset to $target. Backup: $backup"
